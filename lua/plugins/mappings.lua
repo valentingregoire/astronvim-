@@ -1,4 +1,5 @@
 local snip = "<Leader>r"
+local lsp = "<Leader>l"
 return {
   {
     "AstroNvim/astrocore",
@@ -21,6 +22,7 @@ return {
           [snip .. "r"] = { "<Plug>SnipReset", desc = "󰑐 Reset" },
           [snip .. "i"] = { "<Plug>SnipInfo", desc = " Info" },
           [snip .. "q"] = { "<Plug>SnipClose", desc = "󰅙 Close" },
+          [lsp .. "c"] = { "<cmd>Codedocs<CR>", desc = "󰅽 Docs" },
         },
         v = {
           [">"] = { ">gv", desc = "Indent" },
