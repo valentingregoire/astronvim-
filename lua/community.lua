@@ -65,6 +65,7 @@ return {
 
   -- running/debugging
   { import = "astrocommunity.debugging.persistent-breakpoints-nvim" },
+  { import = "astrocommunity.debugging.nvim-dap-view" },
   { import = "astrocommunity.code-runner.sniprun" },
   -- { import = "astrocommunity.recipes.vscode" },
 
