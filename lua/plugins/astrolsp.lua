@@ -31,6 +31,7 @@ return {
       disabled = { -- disable formatting capabilities for the listed language servers
         "basedpyright",
         "ty",
+        "pytest_language_server",
         -- "codespell", -- not an LSP, done through mason-null-ls.lua
       },
       timeout_ms = 1000, -- default format timeout

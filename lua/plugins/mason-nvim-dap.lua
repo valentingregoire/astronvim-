@@ -19,27 +19,52 @@ return {
   "jay-babu/mason-nvim-dap.nvim",
   opts = {
     handlers = {
-      -- python = function(config)
-      --   local dap = require "dap"
-      --   dap.adapters.python = {
-      --     type = "executable",
-      --     command = "${workspaceFolder}/.venv/bin/python",
-      --     args = {
-      --       "-m",
-      --       "debugpy.adapter",
-      --     },
-      --   }
-      --
-      --   dap.configurations.python = {
-      --     {
-      --       type = "python",
-      --       request = "launch",
-      --       name = "  Debug (F5)",
-      --       program = "${file}",
-      --     },
-      --   }
-      --   -- require("mason-nvim-dap").default_setup(config)
-      -- end,
+      python = function(config)
+        local dap = require "dap"
+        dap.adapters.python = function(cb, cfg)
+          if cfg.request == "attach" then
+            local port = (cfg.connect or cfg).port
+            local host = (cfg.connect or cfg).host or "127.0.0.1"
+            cb {
+              type = "server",
+              port = assert(port, "`connect.port` is required for a python `attach` configuration"),
+              host = host,
+              options = {
+                source_filetype = "python",
+              },
+            }
+          else
+            local cwd = vim.fn.getcwd()
+            cb {
+              type = "executable",
+              command = cwd .. "/.venv/bin/python",
+              args = { "-m", "debugpy.adapter" },
+              options = {
+                source_filetype = "python",
+              },
+            }
+          end
+        end
+        -- dap.adapters.python = {
+        --   type = "executable",
+        --   -- command = "${workspaceFolder}/.venv/bin/python",
+        --   command = cwd .. "/.venv/bin/python",
+        --   args = {
+        --     "-m",
+        --     "debugpy.adapter",
+        --   },
+        -- }
+
+        dap.configurations.python = {
+          {
+            type = "python",
+            request = "launch",
+            name = "  Debug (F5)",
+            program = "${file}",
+          },
+        }
+        -- require("mason-nvim-dap").default_setup(config)
+      end,
       js = function(config)
         local dap = require "dap"
         dap.adapters["pwa-node"] = {

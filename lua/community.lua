@@ -38,7 +38,7 @@ return {
   -- language packs
   -- backend
   -- Python/toml
-  { import = "astrocommunity.pack.python.base" },
+  -- { import = "astrocommunity.pack.python.base" },
   -- { import = "astrocommunity.pack.python.basedpyright" },
   -- { import = "astrocommunity.pack.python.ruff" },
   -- lua
