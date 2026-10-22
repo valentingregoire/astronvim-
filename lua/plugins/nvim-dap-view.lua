@@ -4,9 +4,6 @@ return {
     winbar = {
       default_section = "scopes",
       show_keymap_hints = false,
-      controls = {
-        enabled = true,
-      },
     },
     windows = {
       size = 0.3,
